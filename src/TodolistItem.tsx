@@ -3,26 +3,30 @@ import {Button} from "./Button.tsx";
 
 type Props = {
     title: string
-    subTitle?: string
-    description?: string
-    tasks: Task[]
+    tasks: Task[],
+    deleteTask: (id: number) => void,
 }
 
-
-export const TodolistItem = (props: Props) => {
+export const TodolistItem = ({title, tasks, deleteTask}: Props) => {
+    const func = (id: number) => {
+        console.log(id)
+        deleteTask(id)
+    }
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{title}</h3>
             <div>
                 <input/>
                 <Button title="+" />
             </div>
-            {props.tasks.length > 0 ?
-                <ul>{props.tasks.map((task: Task) => {
+            <button onClick={() => func(5)}>ssdasdwww</button>
+            {tasks.length > 0 ?
+                <ul>{tasks.map((task: Task) => {
                     return (
                         <li key={task.id}>
                             <input type='checkbox' checked={task.isDone}/>
                             <span>{task.title}</span>
+                            <button onClick={() => deleteTask(task.id)}>Xxx</button>
                         </li>
                     )
                 })}
