@@ -6,3 +6,37 @@
 .app > div {
   margin-right: 50px;
 }
+
+.task {
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.isDone {
+  text-decoration: line-through;
+  opacity: 0.3;
+}
+
+.btn-filter-active {
+  background-color: #1159ef;
+  border-radius: 4px;
+  width: 90px;
+  border: none;
+  height: 35px;
+  color: white;
+  padding: 0 6px;
+}
+.btn-filter-no-active {
+  height: 35px;
+  background-color: #a3a3a3;
+  border: none;
+  width: 90px;
+  border-radius: 4px;
+  color: white;
+  padding: 0 6px;
+}
+
+.error-input {
+  border: 1px solid red;
+}

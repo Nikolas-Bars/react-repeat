@@ -5,7 +5,10 @@ type Props = {
 }
 
 export const Button = ({title, disabled, onClick}: Props) => {
+    const onClickHandler = () => {
+        onClick()
+    }
     return (
-        <button disabled={disabled} onClick={onClick}>{title}</button>
+        <button disabled={disabled} onClick={() => onClickHandler()}>{title}</button>
     )
 }

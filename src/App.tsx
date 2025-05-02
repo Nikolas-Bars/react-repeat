@@ -18,6 +18,8 @@ export const App = () => {
         { id: v1(), title: 'ReactJS', isDone: false },
     ])
 
+    const [filter, setFilter] = useState<FilterType>("all")
+
     const createTask = (title: string) => {
         setTasks([...tasks, { id: v4(), title, isDone: false}])
     }
@@ -26,7 +28,12 @@ export const App = () => {
         setTasks(tasks.filter((item) => item.id !== id))
     }
 
-    const [filter, setFilter] = useState<FilterType>("all")
+    const changeTaskStatus = (taskId: string, isDone: boolean) => {
+        const newTasks: Array<Task> = tasks.map((task) => {
+           return task.id === taskId ? {...task, isDone} : task
+        });
+        setTasks(newTasks)
+    }
 
     let filteredTasks: Task[] = [];
 
@@ -48,7 +55,14 @@ export const App = () => {
 
     return (
       <div className="app">
-        <TodolistItem title="Jeppa" tasks={filteredTasks} createTask={createTask} deleteTask={deleteTask} changeFilter={changeFilter} />
+        <TodolistItem
+            title="LIST"
+            tasks={filteredTasks}
+            createTask={createTask}
+            activeFilter={filter}
+            deleteTask={deleteTask}
+            changeTaskStatus={changeTaskStatus}
+            changeFilter={changeFilter} />
       </div>
   )
 }

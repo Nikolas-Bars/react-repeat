@@ -1,16 +1,19 @@
 import {FilterType} from "./App.tsx";
-import {Button} from "./Button.tsx";
+import {SuperButton} from "./SuperButton.tsx";
 
 type Props = {
     changeFilter: (filter: FilterType) => void,
+    activeFilter: FilterType,
 }
 
-export const FilterButtons = ({changeFilter}: Props) => {
+export const FilterButtons = ({changeFilter, activeFilter}: Props) => {
     return (
         <div style={{display: "flex", justifyContent: "space-between"}}>
-            <Button title="All" onClick={() => changeFilter("all")} />
-            <Button title="Active" onClick={() => changeFilter("active")} />
-            <Button title="Completed" onClick={() => changeFilter("completed")} />
+            <SuperButton className={activeFilter === 'all' ? 'btn-filter-active' : 'btn-filter-no-active'} title="All" onClick={() => changeFilter("all")} />
+            <SuperButton className={activeFilter === 'active' ? 'btn-filter-active' : 'btn-filter-no-active'} title="Active" onClick={() => changeFilter("active")} />
+            <SuperButton className={activeFilter === 'completed' ? 'btn-filter-active' : 'btn-filter-no-active'} onClick={() => changeFilter("completed")}>
+                Completed
+            </SuperButton>
         </div>
     )
 }
