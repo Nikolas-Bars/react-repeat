@@ -37,21 +37,27 @@ export const App = () => {
 
     let filteredTasks: Task[] = [];
 
-    if (filter === "all") {
-        filteredTasks = tasks
+    const getFilteredTasks = (filter: FilterType) => {
+        if (filter === "all") {
+            filteredTasks = tasks
+        }
+
+        if (filter === "completed") {
+            filteredTasks = tasks.filter((item) => item.isDone)
+        }
+
+        if (filter === "active") {
+            filteredTasks = tasks.filter((item) => !item.isDone)
+        }
     }
 
-    if (filter === "completed") {
-        filteredTasks = tasks.filter((item) => item.isDone)
-    }
 
-    if (filter === "active") {
-        filteredTasks = tasks.filter((item) => !item.isDone)
-    }
 
     const changeFilter = (filter: FilterType) => {
         setFilter(filter)
     }
+
+    getFilteredTasks(filter)
 
     return (
       <div className="app">
