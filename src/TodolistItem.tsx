@@ -3,6 +3,9 @@ import {TaskList} from "./TaskList.tsx";
 import {FilterButtons} from "./FilterButtons.tsx";
 import {AddTaskForm} from "./AddTaskForm.tsx";
 import {useState} from "react";
+import {Button} from "./Button.tsx";
+import {EditableSpan} from "./EditableSpan.tsx";
+import s from "./TodolistList.module.css"
 
 type Props = {
     title: string
@@ -11,9 +14,12 @@ type Props = {
     createTask: (title: string, todolistId: string) => void,
     deleteTask: (taskId: string, todolistId: string) => void,
     changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void,
+    deleteTodolist: (todolistId: string) => void,
+    updateTodolistTitle: (todolistId: string, title: string) => void,
+    updateTaskTitle: (todolistId: string, taskId: string, title: string) => void,
 }
 
-export const TodolistItem = ({todolistId, title, tasks, deleteTask, changeTaskStatus, createTask}: Props) => {
+export const TodolistItem = ({todolistId, updateTaskTitle, updateTodolistTitle, deleteTodolist, title, tasks, deleteTask, changeTaskStatus, createTask}: Props) => {
 
     let filteredTasks: Task[] = [];
 
@@ -47,11 +53,23 @@ export const TodolistItem = ({todolistId, title, tasks, deleteTask, changeTaskSt
     const deleteTaskHandler = (taskId: string) => {
         deleteTask(taskId, todolistId)
     }
+    const deleteTodolistHandler = () => {
+        deleteTodolist(todolistId)
+    }
+    const changeTodolistTitleHandler = (newTitle: string) => {
+        updateTodolistTitle(todolistId, newTitle)
+    }
+    const  updateTaskTitleHandler = (taskId: string, newTitle: string) => {
+        updateTaskTitle(todolistId, taskId, newTitle)
+    }
     return (
-        <div style={{display: "flex", minWidth: "280px", flexDirection: "column", border: "1px solid black", padding: "0 16px 16px 16px", borderRadius: "8px", justifyContent: "space-between"}}>
-            <h3>{title}</h3>
-            <AddTaskForm createTask={createTaskHandler} />
-            <TaskList tasks={filteredTasks} deleteTask={deleteTaskHandler} changeTaskStatus={changeTaskStatusHandler} />
+        <div className={s.todolist_item_main}>
+            <div className={s.todolist_item_header}><EditableSpan title={title} callback={changeTodolistTitleHandler} /><Button title={'X'} onClick={deleteTodolistHandler} /></div>
+            <div>
+                <AddTaskForm createTask={createTaskHandler} />
+            </div>
+
+            <TaskList tasks={filteredTasks} updateTaskTitle={updateTaskTitleHandler} deleteTask={deleteTaskHandler} changeTaskStatus={changeTaskStatusHandler} />
             <div>
                 <FilterButtons changeFilter={changeFilter} activeFilter={filter} />
             </div>

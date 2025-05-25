@@ -1,0 +1,38 @@
+.main {
+    display: flex;
+    max-width: 1000px;
+    border: 2px solid blue;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.todolists_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+.todolist {
+    margin: 8px 8px;
+}
+
+.todolist_item_main {
+    display: flex;
+    min-width: 280px;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 0 16px 16px 16px;
+    border-radius: 8px;
+    justify-content: space-between;
+}
+
+.todolist_item_header {
+    display: flex;
+    margin: 8px 0;
+    border: 2px solid gray;
+    padding: 8px;
+    border-radius: 4px;
+    height: 40px;
+    align-items: center;
+    justify-content: space-between;
+}
